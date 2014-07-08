@@ -53,7 +53,8 @@ Starred items are required:
 			context: <object: vars defined in this scope>
 		},
 		...
-	]
+	],
+	schema_version: 1
 };
 ```
 
