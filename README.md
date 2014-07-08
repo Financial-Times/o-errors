@@ -4,7 +4,7 @@ This module provides a decoupled events-based mechanism for modules and products
 
 ## Events
 
-### `oErrors.log`
+### `oErrors.error`
 
 To be fired on a module's owned DOM or `document.body`
 
@@ -13,31 +13,26 @@ To be fired on a module's owned DOM or `document.body`
 
 ## API (product use only)
 
-### `init(name)`
+### `init(name, config)`
 
-Bind to `window.onerror` and `oErrors.error`.
+Initialise the error handler and bind to `oErrors.error` events.
 
-* `name`: String, optional. Sets a label called 'app' with this value.
+* `name`: String, required. Sets a label called 'app' with this value.
+* `config`: Object, optional.  Allows behaviour to be configured as follows:
+  * `.isDev`: Bool. If true, enables dev mode (throw all errors to the console, do not pass to transport). Default is false.
+  * `.labels`: Object. Sets custom labels to be included with any error reports
+  * `.transport`: Function. Custom transport for error reports.  If set, will be called whenever an error is available, and will be passed a single argument containing data in an object conforming to the error data model.  If not set, a default internal transport will be used, which will report errors to the error routing service.
+  * `captureNativeEvents`: Bool. Whether to bind to browser-native events, currently only `window.onerror`.  Default true.  If false, the module will only handle errors triggered with `oErrors.error`.
 
-### `setDev(isdev)`
+Example:
 
-Switch to dev mode.  Throw all errors to the console.  Do not pass any errors to custom or built in transports.
-
-* `isdev`: Bool, optional. If true, enables dev mode, if false, disables it.  Default is true.
-
-### `setLabels(labels)`
-
-Adds or replaces labels to apply to error reports
-
-* `labels`: Object, required.  Key-value pairs to merge into the labels object.
-
-### `setTransport(transFn)`
-
-Configures a function to handle error reports, which will be called every time an error occurs.  When called it will be passed a single argument containing the data in an object conforming to the error data model. If a transport is not set, a built in transport will be used to send errors to a service.
-
-Filter is a function that gets passed the detail object from the custom event to determine whether the error should be reported
-
-* `transFn`: Function, required.  Function to handle errors, or null to revert to default built in transport.
-
-
-
+```javascript
+oErrors.init("fastft", {
+  isDev: true,
+  captureNativeEvents: false,
+  transport: myTransportFunc,
+  labels: {
+    version: "2.3.3"
+  }
+});
+```
