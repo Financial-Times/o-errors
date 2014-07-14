@@ -4,33 +4,42 @@ This module provides a decoupled events-based mechanism for modules and products
 
 ## Events
 
-### `oErrors.log`
+### `oErrors.error`
 
 To be fired on a module's owned DOM or `document.body`
 
-`details`: 
+`details` payload may include any item from the data model (TBC). 
 
-```
-{
-   error: // the error that's been caught
-   stack: // [] array of modules through which the error has passed. e.g. the module catching the error will 
-            set this to [o-modulename#method]. Parent modules *may* listen for `oErrors.log` within their 
-            owned DOM and use array.shift() to add their module name to this stack... or come to think of it, 
-            o-errors could construct this stack by traversing the DOM upwards from the el the event was fired on
-   info: // an object or string with further useful debug info e.g. params originally passed in to the method
-            that caught the error
-}
-```
 
 ## API (product use only)
 
-### `oErrors#report(appName, url, filter)`
+### `init(name, config)`
 
-Each error will be reported with name `appName + ': ' + detail.stack.join(': ') or similar
+Initialise the error handler and bind to `oErrors.error` events.
 
-If url is set will post each error back to the given url. If not set will log to a default service e.g. one that jsut forwards everything to splunk. If set to 'console' will simply log to console
+* `name`: String, required. Sets a label called 'app' with this value.
+* `config`: Object, optional.  Allows behaviour to be configured as follows:
+  * `.isDev`: Bool. If true, enables dev mode (throw all errors to the console, do not pass to transport). Default is false.
+  * `.labels`: Object. Sets custom labels to be included with any error reports
+  * `.transport`: Function. Custom transport for error reports.  If set, will be called whenever an error is available, and will be passed a single argument containing data in an object conforming to the error data model.  If not set, a default internal transport will be used, which will report errors to the error routing service.
+  * `captureNativeEvents`: Bool. Whether to bind to browser-native events, currently only `window.onerror`.  Default true.  If false, the module will only handle errors triggered with `oErrors.error`.
 
-Filter is a function that gets passed the detail object from the custom event to determine whether the error should be reported
+Example:
 
+```javascript
+oErrors.init("fastft", {
+  isDev: true,
+  captureNativeEvents: false,
+  transport: myTransportFunc,
+  labels: {
+    version: "2.3.3"
+  }
+});
+```
 
+### `report(err, labels)`
 
+Report an error.  Developers are advised to use DOM events rather than the explicit API method for reporting, but this method should be used when DOM Events are not available, eg in Node.
+
+* `err`: Error, required.  A JavaScript Error object
+* `labels`: Object, optional. Labels to apply to this error report (to be merged with labels configured on the o-errors instance)
