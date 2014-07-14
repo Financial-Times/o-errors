@@ -36,3 +36,10 @@ oErrors.init("fastft", {
   }
 });
 ```
+
+### `report(err, labels)`
+
+Report an error.  Developers are advised to use DOM events rather than the explicit API method for reporting, but this method should be used when DOM Events are not available, eg in Node.
+
+* `err`: Error, required.  A JavaScript Error object
+* `labels`: Object, optional. Labels to apply to this error report (to be merged with labels configured on the o-errors instance)
