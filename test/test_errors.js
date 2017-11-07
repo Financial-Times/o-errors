@@ -297,6 +297,20 @@ describe("oErrors", function() {
 			const error = errors.report(new Error("Test"));
 			proclaim.equal(error.message, "Test");
 		});
+
+		it("should not log an error to sentry if it finds window.FT in the message", function() {
+			mockRavenClient.captureException = function() {
+				throw new Error("Errors related to window.FT should not be sent to sentry");
+			};
+
+			errors.init({
+				sentryEndpoint: "http://app.getsentry.com/123",
+			}, mockRavenClient);
+
+
+			errors.report(new Error("Error in window.FT"));
+
+		});
 	});
 
 	describe("#_getEventPath(ev)", function() {
