@@ -254,6 +254,10 @@ Errors.prototype.report = function(error, context) {
 		return error;
 	}
 
+	if(error.toString().search("window.FT") > 0) {
+		return error;
+	}
+
 	const transformedError = this._transformError(reportObject);
 
 	// The _transformError may return a bad value, in order to protect against
