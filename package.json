@@ -10,7 +10,7 @@
         "stylelint": "^13.7.0",
         "stylelint-config-origami-component": "^1.0.4"
     },
-    "main": "main.js",
+    "browser": "main.js",
     "peerDependencies": {
         "raven-js": "^3.14.0"
     },
