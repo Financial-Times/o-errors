@@ -1,30 +1,40 @@
 {
-    "name": "@financial-times/o-errors",
-    "version": "100.0.0-8",
-    "description": "A decoupled events-based mechanism for components to report errors and an API for products to report client-side errors.",
-    "license": "MIT",
-    "type": "module",
-    "exports": {
-        ".": {
-            "browser": "./main.js"
-        }
-    },
-    "browser": "./main.js",
-    "types": "types",
-    "devDependencies": {
-        "eslint": "^7.8.1",
-        "eslint-config-origami-component": "^2.1.0",
-        "origami-ci-tools": "^2.0.2",
-        "remark": "^12.0.1",
-        "remark-lint": "^7.0.1",
-        "remark-preset-lint-origami-component": "^1.1.3",
-        "stylelint": "^13.7.0",
-        "stylelint-config-origami-component": "^1.0.4"
-    },
-    "peerDependencies": {
-        "raven-js": "^3.14.0"
-    },
-    "publishConfig": {
-        "registry": "https://origami-npm-registry-prototype.herokuapp.com"
+  "name": "@financial-times/o-errors",
+  "version": "100.0.0-10",
+  "description": "A decoupled events-based mechanism for components to report errors and an API for products to report client-side errors.",
+  "keywords": [],
+  "homepage": "https://github.com/Financial-Times/o-errors#readme",
+  "bugs": {
+    "url": "https://github.com/Financial-Times/o-errors/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Financial-Times/o-errors.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "exports": {
+    ".": {
+      "browser": "./main.js"
     }
+  },
+  "browser": "./main.js",
+  "types": "types",
+  "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-origami-component": "^2.1.0",
+    "origami-ci-tools": "^2.0.2",
+    "remark": "^12.0.1",
+    "remark-lint": "^7.0.1",
+    "remark-preset-lint-origami-component": "^1.1.3",
+    "stylelint": "^13.7.0",
+    "stylelint-config-origami-component": "^1.0.4"
+  },
+  "peerDependencies": {
+    "raven-js": "^3.14.0"
+  },
+  "publishConfig": {
+    "registry": "https://origami-npm-registry-prototype.herokuapp.com"
+  }
 }
