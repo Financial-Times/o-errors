@@ -1,6 +1,6 @@
 {
   "name": "@financial-times/o-errors",
-  "version": "100.0.0-10",
+  "version": "100.0.0-11",
   "description": "A decoupled events-based mechanism for components to report errors and an API for products to report client-side errors.",
   "keywords": [],
   "homepage": "https://github.com/Financial-Times/o-errors#readme",
