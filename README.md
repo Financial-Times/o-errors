@@ -1,5 +1,11 @@
 # o-errors [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
 
+***
+
+**This component has moved to the [Origami Component System](https://github.com/Financial-Times/origami).**
+
+***
+
 This module provides a decoupled events-based mechanism for modules to report errors and an API for products to report client-side errors.
 
 ## Usage
